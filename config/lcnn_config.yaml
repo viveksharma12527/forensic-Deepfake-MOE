@@ -1,15 +1,15 @@
 seed:             12345
-num_thread:       24
+num_thread:       2
 prefetch_factor:  6
 
-num_epochs:       150
+num_epochs:       3
 early_stopping:   .inf
 lr:               0.0001
 weight_decay:     0.0001
-batch_size:       64
+batch_size:       16
 win_len:          3.0
 
-T_max:            150  # note: it was 100, but it must be equal to num_epochs for true cosine annealing
+T_max:            3  # note: it was 100, but it must be equal to num_epochs for true cosine annealing
 eta_min:          0.00001
 
 lcnn:
@@ -54,25 +54,15 @@ model_pretrained:     'LCNN_PRETRAINED.pth'
 
 # Dataset names are case-sensitive.
 training_datasets:
-  - asvspoof19
-  - fakeorreal
-  - add2022
   - inthewild
 
 test_datasets:
-  - asvspoof19
-  - fakeorreal
   - inthewild
-  - purdue
-  - timit
-  - add2022
-  - asvspoof5
-  - mlaad
 
 asvspoof2019_path:    '/nas/public/dataset/asvspoof2019'
 for_path:             '/nas/public/dataset/fake_or_real_FOR'
 add2022_path:         '/nas/public/dataset/ADD_challenge'
-InTheWild_path:       '/nas/public/dataset/In-The-Wild'
+InTheWild_path:       '/Users/vivek/datasets/ITW_synthetic'
 
 purdue_path:          '/nas/public/dataset/purdue_data'
 ljspeech_path:        '/nas/public/dataset/lj_speech'
