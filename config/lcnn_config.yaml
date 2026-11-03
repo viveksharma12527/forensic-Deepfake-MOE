@@ -1,0 +1,90 @@
+seed:             12345
+num_thread:       24
+prefetch_factor:  6
+
+num_epochs:       150
+early_stopping:   .inf
+lr:               0.0001
+weight_decay:     0.0001
+batch_size:       64
+win_len:          3.0
+
+T_max:            150  # note: it was 100, but it must be equal to num_epochs for true cosine annealing
+eta_min:          0.00001
+
+lcnn:
+  architecture:
+    num_class: 2
+
+moe:
+  architecture:
+    num_class: 2
+    num_experts:
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 8
+      - 4
+    redux_channels: 16
+    gating_hidden_dim: 64
+    routing_type: 'topk_softmax'
+
+  train:
+    min_temperature:    1.0
+    max_temperature:    1.0
+    lambda_importance:  1.0
+    lambda_load:        1.0
+
+  val:
+    k: 1
+    temperature: 1.0
+
+  eval:
+    k: 1
+    temperature: 1.0
+
+save_model_folder:    'checkpoints/LCNN_model/'
+save_results_folder:  'results/'
+model_pretrained:     'LCNN_PRETRAINED.pth'
+
+# Dataset names are case-sensitive.
+training_datasets:
+  - asvspoof19
+  - fakeorreal
+  - add2022
+  - inthewild
+
+test_datasets:
+  - asvspoof19
+  - fakeorreal
+  - inthewild
+  - purdue
+  - timit
+  - add2022
+  - asvspoof5
+  - mlaad
+
+asvspoof2019_path:    '/nas/public/dataset/asvspoof2019'
+for_path:             '/nas/public/dataset/fake_or_real_FOR'
+add2022_path:         '/nas/public/dataset/ADD_challenge'
+InTheWild_path:       '/nas/public/dataset/In-The-Wild'
+
+purdue_path:          '/nas/public/dataset/purdue_data'
+ljspeech_path:        '/nas/public/dataset/lj_speech'
+librispeech_path:     '/nas/public/dataset/LibriSpeech'
+timit_tts_path:       '/nas/public/dataset/TIMIT-TTS'
+vidtimit_path:        '/nas/public/dataset/VidTIMIT'
+
+MLAAD_path:           '/nas/public/dataset/MLAADv8/fake'
+MAILABS_path:         '/nas/public/dataset/M-AILABS_eng'
+
+asvspoof21_df_meta:   'meta/ASV21_DF_metadata_CM.txt'
+asvspoof21_df_path:   '/nas/public/dataset/asvspoof2021/ASVspoof2021_DF_eval/flac'
+
+asvspoof5_meta:       '/nas/public/dataset/asvspoof5/ASVspoof5.eval.track_1.tsv'
+asvspoof5_path:       '/nas/public/dataset/asvspoof5/flac_E_eval'
